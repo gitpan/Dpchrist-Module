@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST
+Makefile.PL
+example/.exists.pl
+lib/Dpchrist/Module.pm
+lib/Dpchrist/Module/MakefilePL.pm
+t/0_compile_modules.t
+t/0_compile_scripts.t
+t/1_Dpchrist-Module.t
+t/1_Dpchrist-Module-MakefilePL.t
+t/9_pod.t
+t/9_prereq.t
+META.yml                                 Module meta-data (added by MakeMaker)
