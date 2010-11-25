@@ -1,5 +1,5 @@
 #######################################################################
-# $Id: Makefile.PL,v 1.12 2010-02-27 21:42:47 dpchrist Exp $
+# $Id: Makefile.PL,v 1.13 2010-11-25 02:35:31 dpchrist Exp $
 #
 # Copyright 2010 by David Paul Christensen dpchrist@holgerdanske.com
 #
@@ -17,8 +17,6 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307,
 # USA.
 #######################################################################
-
-use 5.010000;
 
 use ExtUtils::MakeMaker;
 
