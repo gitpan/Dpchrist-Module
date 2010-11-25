@@ -1,5 +1,5 @@
 #######################################################################
-# $Id: Makefile.PL,v 1.13 2010-11-25 02:35:31 dpchrist Exp $
+# $Id: Makefile.PL,v 1.14 2010-11-25 18:00:28 dpchrist Exp $
 #
 # Copyright 2010 by David Paul Christensen dpchrist@holgerdanske.com
 #
@@ -27,6 +27,7 @@ use Dpchrist::Module::MakefilePL (
 	lib/Dpchrist/Module.pm
 	lib/Dpchrist/Module/MakefilePL.pm
     )],
+    -readme		=> 'lib/Dpchrist/Module.pm',
     -release		=> $ENV{RELEASE_ROOT},
 );
 

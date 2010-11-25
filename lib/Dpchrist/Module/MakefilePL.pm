@@ -1,5 +1,5 @@
 #######################################################################
-# $Id: MakefilePL.pm,v 1.41 2010-07-01 05:06:27 dpchrist Exp $
+# $Id: MakefilePL.pm,v 1.42 2010-11-25 18:00:28 dpchrist Exp $
 #######################################################################
 # package:
 #----------------------------------------------------------------------
@@ -9,7 +9,7 @@ package Dpchrist::Module::MakefilePL;
 use strict;
 use warnings;
 
-our $VERSION  = sprintf "%d.%03d", q$Revision: 1.41 $ =~ /(\d+)/g;
+our $VERSION  = sprintf "%d.%03d", q$Revision: 1.42 $ =~ /(\d+)/g;
 
 #######################################################################
 # uses:
@@ -35,19 +35,17 @@ Dpchrist::Module::MakefilePL - extend ExtUtils::MakeMaker Makefile.PL
 
 =head1 SYNOPSIS
 
-See Makefile.PL in distribution tree:
-
-    use Dpchrist::Module::MakefilePL (
-	-mcpani		=> $ENV{CPAN_AUTHORID},
-	-pod2html 	=> [qw(
-	    lib/Dpchrist/Module.pm
-	    lib/Dpchrist/Module/MakefilePL.pm
-	)],
-	-release	=> $ENV{RELEASE_ROOT},
-    );
+See Makefile.PL in source distribution root directory.
 
 
 =head1 DESCRIPTION
+
+This documentation describes module revision $Revision: 1.42 $.
+
+
+This is alpha test level software
+and may change or disappear at any time.
+
 
 This module adds functionality to Makefile.PL
 used by ExtUtils::MakeMaker.
@@ -67,12 +65,20 @@ and option parameters are hash values.
 
 =head3 -mcpani
 
-    -mcpani => EXPR
+    # Makefile.PL
+    use ExtUtils::MakeMaker;
+    use Dpchrist::Module::MakefilePL (
+	-mcpani => EXPR,
+    );
 
 Create a Makefile rule 'mcpani'
 that will add the distribution tarball
 to the MCPAN working directory (repository)
-and then push it to the MCPAN local directory.
+and then push it to the MCPAN local directory
+when I issue the commands:
+
+    $ make dist
+    $ make mcpani
 
 EXPR is used for the --authorid
 parameter to 'mcpani'.
@@ -80,6 +86,7 @@ Default is 'NONE'.
 I put my CPAN author id (DPCHRIST)
 into an environment variable CPAN_AUTHORID in my .bash_profile:
 
+    # .bash_profile
     export CPAN_AUTHORID=DPCHRIST
 
 I then use this environment variable in Makefile.PL
@@ -89,7 +96,7 @@ You will need to run 'make dist' to create the distribution tarball
 before running 'make mcpani'.
 
 You will need a working CPAN::Module::Inject installation
-before running 'make mcpani':
+before running 'make mcpani'.  See the following for details:
 
     perldoc mcpani
     http://www.ddj.com/web-development/184416190
@@ -98,11 +105,13 @@ before running 'make mcpani':
 I set an environment variable in .bash_profile that points to my
 mcpani configuration file:
 
+    # .bash_profile
     export MCPANI_CONFIG=$HOME/.mcpanirc
 
 mcpani will read the environment variable
 and then read the configuration file (~/.mcpanirc):
 
+    # .mcpanirc
     local: /mnt/z/mirror/MCPAN
     remote: ftp://ftp.cpan.org/pub/CPAN ftp://ftp.kernel.org/pub/CPAN
     repository: /home/dpchrist/.mcpani
@@ -111,16 +120,16 @@ and then read the configuration file (~/.mcpanirc):
 
 ~/.mcpani is a staging directory on my local disk.
 
-/mnt/z/mirror/MCPAN is an NFS mount from my web server
-that is served as http://p3600/mirror/MCPAN/.
-See NFS and your web server documentation to set these up.
+/mnt/z/mirror/MCPAN is directory on my web server
+that is served as http://mirror.holgerdanske.com/MCPAN/ .
+See NFS and/or your web server documentation to set these up.
 
 Once the web server was set up,
 I needed to tell cpan where to find the files.
 This only needs to be done once:
 
     $ sudo cpan
-    cpan[1]> o conf urllist http://p3600/mirror/MCPAN/
+    cpan[1]> o conf urllist http://mirror.holgerdanske.com/MCPAN/
     cpan[2]> o conf commit
     cpan[3]> reload index
 
@@ -167,15 +176,24 @@ EOF
 
 =head3 -pod2html
 
-    -pod2html => FILE
-    -pod2html => REF_LIST
+    # Makefile.PL
+
+    use ExtUtils::MakeMaker;
+    
+    use Dpchrist::Module::MakefilePL (
+	-pod2html => [ LIST ],
+    );
 
 Adds a rule to the default Make target ('all')
-which will generate HTML file(s) for the FILE or LIST of files
+which will generate HTML file(s) for listed filed
 using the commands:
 
-    pod2html FILE > FILE-VERSION.html
+    pod2html FILE > PACKAGE-VERSION.html
     rm -f pod2htm?.tmp
+
+HTML files will be generated/ updated whenever I issue the command:
+
+    $ make
 
 =cut
 
@@ -253,9 +271,61 @@ EOF
 
 #######################################################################
 
+=head3 -readme
+
+    # Makefile.PL
+
+    use ExtUtils::MakeMaker;
+    
+    use Dpchrist::Module::MakefilePL (
+	-readme => FILE,
+    );
+
+Adds a rule to the default Make target ('all')
+which will generate a README for FILE
+using the command:
+
+    pod2text FILE > README
+
+=cut
+
+#----------------------------------------------------------------------
+
+sub _readme
+{
+    my $file = $import_args{-readme};
+
+    confess join(' ',
+	'Bad file name for -readme option',
+	Data::Dumper->Dump([$file, \%import_args],
+			 [qw(file   *import_args)]),
+    ) unless eval {
+	ref \$file eq "SCALAR"
+	&& -e $file
+    };
+
+    my $frag = <<EOF;
+
+all :: README
+
+README :: $file
+	/usr/bin/pod2text \$< > README
+EOF
+
+    return $frag;
+}
+
+#######################################################################
+
 =head3 -release
 
-    -release => EXPR
+    # Makefile.PL
+
+    use ExtUtils::MakeMaker;
+    
+    use Dpchrist::Module::MakefilePL (
+	-release => EXPR,
+    );
 
 Adds a rule to the default Make target ('all')
 which will copy all *.tar.gz and *.html files
@@ -340,6 +410,8 @@ sub MY::postamble
 
     $retval .= _pod2html(@_)	if $import_args{-pod2html};
 
+    $retval .= _readme(@_)	if $import_args{-readme};
+
     $retval .= _release(@_)	if $import_args{-release};
 
     return $retval;
@@ -350,6 +422,7 @@ sub MY::postamble
 #----------------------------------------------------------------------
 
 1;
+
 __END__
 
 #######################################################################
@@ -362,11 +435,6 @@ __END__
 =head1 INSTALLATION
 
     Installed as part of Dpchrist::Module.
-
-
-=head1 DEPENDENCIES
-
-    Dpchrist::Module
 
 
 =head1 SEE ALSO

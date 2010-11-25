@@ -1,5 +1,5 @@
 #######################################################################
-# $Id: Module.pm,v 1.20 2010-11-25 02:35:32 dpchrist Exp $
+# $Id: Module.pm,v 1.21 2010-11-25 18:00:28 dpchrist Exp $
 #######################################################################
 # package:
 #----------------------------------------------------------------------
@@ -9,13 +9,14 @@ package Dpchrist::Module;
 use strict;
 use warnings;
 
-our $VERSION  = sprintf "%d.%03d", q$Revision: 1.20 $ =~ /(\d+)/g;
+our $VERSION  = sprintf "%d.%03d", q$Revision: 1.21 $ =~ /(\d+)/g;
 
 #######################################################################
 # end of code:
 #----------------------------------------------------------------------
 
 1;
+
 __END__
 
 #######################################################################
@@ -26,6 +27,13 @@ Dpchrist::Module - utilities for Perl modules
 
 
 =head1 DESCRIPTION
+
+This documentation describes module revision $Revision: 1.21 $.
+
+
+This is alpha test level software
+and may change or disappear at any time.
+
 
 This module includes:
 
@@ -43,11 +51,7 @@ This module includes:
     perl Makefile.PL
     make
     make test
-    sudo make install
-    make dist
-    make mcpani
-    make release
-    make realclean
+    make install
 
 
 =head1 DEPENDENCIES
