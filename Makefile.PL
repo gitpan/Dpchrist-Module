@@ -1,5 +1,5 @@
 #######################################################################
-# $Id: Makefile.PL,v 1.14 2010-11-25 18:00:28 dpchrist Exp $
+# $Id: Makefile.PL,v 1.15 2010-11-26 18:13:38 dpchrist Exp $
 #
 # Copyright 2010 by David Paul Christensen dpchrist@holgerdanske.com
 #
@@ -18,18 +18,25 @@
 # USA.
 #######################################################################
 
-use ExtUtils::MakeMaker;
+BEGIN {
+    eval {
+	require Dpchrist::Module::MakefilePL;
+	
+	import Dpchrist::Module::MakefilePL (
+	    -mcpani		=> $ENV{CPAN_AUTHORID},
+	    -pod2html	 	=> [qw(
+		lib/Dpchrist/Module.pm
+		lib/Dpchrist/Module/MakefilePL.pm
+	    )],
+	    -readme		=> 'lib/Dpchrist/Module.pm',
+	    -release		=> $ENV{RELEASE_ROOT},
+	);
+    };
+    warn "skipping Dpchrist::Module::MakefilePL: $@"
+	if $@
+}
 
-use lib 'lib';
-use Dpchrist::Module::MakefilePL (
-    -mcpani		=> $ENV{CPAN_AUTHORID},
-    -pod2html	 	=> [qw(
-	lib/Dpchrist/Module.pm
-	lib/Dpchrist/Module/MakefilePL.pm
-    )],
-    -readme		=> 'lib/Dpchrist/Module.pm',
-    -release		=> $ENV{RELEASE_ROOT},
-);
+use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME		=> 'Dpchrist::Module',
