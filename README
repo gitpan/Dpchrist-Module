@@ -2,7 +2,7 @@ NAME
     Dpchrist::Module - utilities for Perl modules
 
 DESCRIPTION
-    This documentation describes module revision $Revision: 1.23 $.
+    This documentation describes module revision $Revision: 1.24 $.
 
     This is alpha test level software and may change or disappear at any
     time.
@@ -23,11 +23,10 @@ INSTALLATION
     Note that when this module is installed the first time, the command
     'perl Makefile.PL' will generate a warning similar to:
 
-        skipping Dpchrist::Module::MakefilePL: Can't locate Dpchrist/Module/
-        MakefilePL.pm in @INC (@INC contains: /etc/perl /usr/local/lib/perl/
-        5.10.0 /usr/local/share/perl/5.10.0 /usr/lib/perl5 /usr/share/perl5 
-        /usr/lib/perl/5.10 /usr/share/perl/5.10 /usr/local/lib/site_perl .) 
-        at Makefile.PL line 23.
+        Can't locate Dpchrist/Module/MakefilePL.pm in @INC (@INC contains: /
+        etc/perl /usr/local/lib/perl/5.10.0 /usr/local/share/perl/5.10.0 /us
+        r/lib/perl5 /usr/share/perl5 /usr/lib/perl/5.10 /usr/share/perl/5.10
+         /usr/local/lib/site_perl .) at Makefile.PL line 23.
 
     The warning may be safely ignored.
 

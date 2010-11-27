@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Dpchrist-Module
-version:            1.023
+version:            1.024
 abstract:           utilities for Perl modules
 author:
     - David Christensen <dpchrist@holgerdanske.com>
@@ -10,7 +10,11 @@ configure_requires:
     ExtUtils::MakeMaker:  0
 build_requires:
     ExtUtils::MakeMaker:  0
-requires:  {}
+requires:
+    Getopt::Long:  0
+    Pod::Html:     0
+    Pod::Text:     0
+    Pod::Usage:    0
 no_index:
     directory:
         - t

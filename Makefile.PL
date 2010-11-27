@@ -1,5 +1,5 @@
 #######################################################################
-# $Id: Makefile.PL,v 1.15 2010-11-26 18:13:38 dpchrist Exp $
+# $Id: Makefile.PL,v 1.16 2010-11-27 01:51:53 dpchrist Exp $
 #
 # Copyright 2010 by David Paul Christensen dpchrist@holgerdanske.com
 #
@@ -18,30 +18,32 @@
 # USA.
 #######################################################################
 
-BEGIN {
-    eval {
-	require Dpchrist::Module::MakefilePL;
-	
-	import Dpchrist::Module::MakefilePL (
-	    -mcpani		=> $ENV{CPAN_AUTHORID},
-	    -pod2html	 	=> [qw(
-		lib/Dpchrist/Module.pm
-		lib/Dpchrist/Module/MakefilePL.pm
-	    )],
-	    -readme		=> 'lib/Dpchrist/Module.pm',
-	    -release		=> $ENV{RELEASE_ROOT},
-	);
-    };
-    warn "skipping Dpchrist::Module::MakefilePL: $@"
-	if $@
-}
+eval {
+    require Dpchrist::Module::MakefilePL;
+
+    import Dpchrist::Module::MakefilePL (
+	-mcpani		=> $ENV{CPAN_AUTHORID},
+	-pod2html 	=> [qw(
+	    lib/Dpchrist/Module.pm
+	    lib/Dpchrist/Module/MakefilePL.pm
+	)],
+	-readme		=> 'lib/Dpchrist/Module.pm',
+	-release	=> $ENV{RELEASE_ROOT},
+    );
+};
+warn $@ if $@;
 
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
     NAME		=> 'Dpchrist::Module',
     VERSION_FROM	=> 'lib/Dpchrist/Module.pm',
-    PREREQ_PM		=> {},
+    PREREQ_PM		=> {
+	'Getopt::Long'		=> 0,
+	'Pod::Html'		=> 0,
+	'Pod::Text'		=> 0,
+	'Pod::Usage'		=> 0,
+    },
     ABSTRACT_FROM	=> 'lib/Dpchrist/Module.pm',
     AUTHOR		=>
 	'David Christensen <dpchrist@holgerdanske.com>',
