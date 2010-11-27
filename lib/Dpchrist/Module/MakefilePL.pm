@@ -1,5 +1,5 @@
 #######################################################################
-# $Id: MakefilePL.pm,v 1.44 2010-11-27 03:37:59 dpchrist Exp $
+# $Id: MakefilePL.pm,v 1.45 2010-11-27 07:13:06 dpchrist Exp $
 #######################################################################
 # package:
 #----------------------------------------------------------------------
@@ -9,7 +9,7 @@ package Dpchrist::Module::MakefilePL;
 use strict;
 use warnings;
 
-our $VERSION  = sprintf "%d.%03d", q$Revision: 1.44 $ =~ /(\d+)/g;
+our $VERSION  = sprintf "%d.%03d", q$Revision: 1.45 $ =~ /(\d+)/g;
 
 #######################################################################
 # uses:
@@ -36,7 +36,7 @@ Dpchrist::Module::MakefilePL - extend ExtUtils::MakeMaker Makefile.PL
 
 =head1 DESCRIPTION
 
-This documentation describes module revision $Revision: 1.44 $.
+This documentation describes module revision $Revision: 1.45 $.
 
 
 This is alpha test level software
@@ -281,7 +281,7 @@ sub _pod2html
 all :: $html
 
 $html :: $file
-	/usr/bin/pod2html \$< > $html
+	pod2html \$< > $html
 	rm -f pod2htm?.tmp
 EOF
 
@@ -342,7 +342,7 @@ sub _readme
 all :: README
 
 README :: $file
-	/usr/bin/pod2text \$< > README
+	pod2text \$< > README
 EOF
 
     return $frag;

@@ -1,5 +1,5 @@
 #######################################################################
-# $Id: Module.pm,v 1.25 2010-11-27 03:37:59 dpchrist Exp $
+# $Id: Module.pm,v 1.26 2010-11-27 07:13:06 dpchrist Exp $
 #######################################################################
 # package:
 #----------------------------------------------------------------------
@@ -9,7 +9,7 @@ package Dpchrist::Module;
 use strict;
 use warnings;
 
-our $VERSION  = sprintf "%d.%03d", q$Revision: 1.25 $ =~ /(\d+)/g;
+our $VERSION  = sprintf "%d.%03d", q$Revision: 1.26 $ =~ /(\d+)/g;
 
 #######################################################################
 # end of code:
@@ -28,7 +28,7 @@ Dpchrist::Module - utilities for Perl modules
 
 =head1 DESCRIPTION
 
-This documentation describes module revision $Revision: 1.25 $.
+This documentation describes module revision $Revision: 1.26 $.
 
 
 This is alpha test level software
