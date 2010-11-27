@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Dpchrist-Module
-version:            1.024
+version:            1.025
 abstract:           utilities for Perl modules
 author:
     - David Christensen <dpchrist@holgerdanske.com>

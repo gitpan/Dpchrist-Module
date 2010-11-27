@@ -1,5 +1,5 @@
 #######################################################################
-# $Id: Makefile.PL,v 1.16 2010-11-27 01:51:53 dpchrist Exp $
+# $Id: Makefile.PL,v 1.17 2010-11-27 03:37:59 dpchrist Exp $
 #
 # Copyright 2010 by David Paul Christensen dpchrist@holgerdanske.com
 #
@@ -39,10 +39,10 @@ WriteMakefile(
     NAME		=> 'Dpchrist::Module',
     VERSION_FROM	=> 'lib/Dpchrist/Module.pm',
     PREREQ_PM		=> {
-	'Getopt::Long'		=> 0,
-	'Pod::Html'		=> 0,
-	'Pod::Text'		=> 0,
-	'Pod::Usage'		=> 0,
+	Getopt::Long		=> 0,
+	Pod::Html		=> 0,
+	Pod::Text		=> 0,
+	Pod::Usage		=> 0,
     },
     ABSTRACT_FROM	=> 'lib/Dpchrist/Module.pm',
     AUTHOR		=>

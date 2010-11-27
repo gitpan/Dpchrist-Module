@@ -2,7 +2,7 @@ NAME
     Dpchrist::Module - utilities for Perl modules
 
 DESCRIPTION
-    This documentation describes module revision $Revision: 1.24 $.
+    This documentation describes module revision $Revision: 1.25 $.
 
     This is alpha test level software and may change or disappear at any
     time.
@@ -15,27 +15,30 @@ DESCRIPTION
     2. Test scripts I commonly use in my modules.
 
 INSTALLATION
-        perl Makefile.PL
-        make
-        make test
-        make install
+    Old school:
 
-    Note that when this module is installed the first time, the command
-    'perl Makefile.PL' will generate a warning similar to:
+        $ perl Makefile.PL
+        $ make
+        $ make test
+        $ make install
+
+    Minimal:
+
+        $ cpan Module::Dpchrist
+
+    Complete:
+
+        $ cpan Bundle::Dpchrist
+
+    The following warning may be safely ignored:
 
         Can't locate Dpchrist/Module/MakefilePL.pm in @INC (@INC contains: /
         etc/perl /usr/local/lib/perl/5.10.0 /usr/local/share/perl/5.10.0 /us
         r/lib/perl5 /usr/share/perl5 /usr/lib/perl/5.10 /usr/share/perl/5.10
-         /usr/local/lib/site_perl .) at Makefile.PL line 23.
+         /usr/local/lib/site_perl .) at Makefile.PL line 22.
 
-    The warning may be safely ignored.
-
-  DEPENDENCIES
-    This module depends upon itself.
-
-    For the curious, see Makefile.PL in the source distribution root
-    directory for the BEGIN{eval{...}} solution to this chicken-and-egg
-    problem.
+  PREREQUISITES
+    See Makefile.PL in the source distribution root directory.
 
 SEE ALSO
         Dpchrist::Module::MakefilePL
